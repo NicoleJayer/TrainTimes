@@ -1,0 +1,12 @@
+body {
+  background-image: url(../images/hogwartsexpress.jpg);
+  background-size: cover;
+}
+
+.col-md-8 {
+  background-color:rgba(255,255,255,0.6);
+  text-align: center;
+  padding: 30px 0px 50px 0px;
+  margin-top: 80px;
+
+}
