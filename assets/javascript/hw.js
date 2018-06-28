@@ -1,4 +1,5 @@
-var config = {
+
+  var config = {
     apiKey: "AIzaSyAGK2ln5AYvzVMyjYAT5bXJfaPG5mkGQds",
     authDomain: "traintimes-46de6.firebaseapp.com",
     databaseURL: "https://traintimes-46de6.firebaseio.com",
@@ -6,6 +7,7 @@ var config = {
     storageBucket: "traintimes-46de6.appspot.com",
     messagingSenderId: "146296837702"
   };
+
   firebase.initializeApp(config);
 
 
@@ -20,62 +22,67 @@ var config = {
       var frequency = $("#frequency-input").val().trim();
 
   // Creates local "temporary" object for holding employee data
-  var newEmp = {
-    name: empName,
-    role: empRole,
-    start: empStart,
-    rate: empRate
-  };
+  var newTrain = {
 
-  // Uploads employee data to the database
-  database.ref().push(newEmp);
+     name: trainName,
+     destination: destination,
+     firstTrain: firstTrain,
+     frequency: frequency
+   };
 
-  // Logs everything to console
-  console.log(newEmp.name);
-  console.log(newEmp.role);
-  console.log(newEmp.start);
-  console.log(newEmp.rate);
+   trainData.ref().push(newTrain);
 
-  // Alert
-  alert("Employee successfully added");
+   console.log(newTrain.name);
+   console.log(newTrain.destination);
+   console.log(newTrain.firstTrain);
+   console.log(newTrain.frequency);
 
-  // Clears all of the text-boxes
-  $("#employee-name-input").val("");
-  $("#role-input").val("");
-  $("#start-input").val("");
-  $("#rate-input").val("");
-});
+   // text boxes will clear after info is submitted
+   $("#train-name-input").val("");
+   $("#destination-input").val("");
+   $("#first-train-input").val("");
+   $("#frequency-input").val("");
+
+   return false;
+ });
+
 
 // 3. Create Firebase event for adding employee to the database and a row in the html when a user adds an entry
-database.ref().on("child_added", function(childSnapshot, prevChildKey) {
+trainData.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
-  console.log(childSnapshot.val());
+    console.log(childSnapshot.val());
 
-  // Store everything into a variable.
-  var empName = childSnapshot.val().name;
-  var empRole = childSnapshot.val().role;
-  var empStart = childSnapshot.val().start;
-  var empRate = childSnapshot.val().rate;
+    var tName = childSnapshot.val().name;
+    var tDestination = childSnapshot.val().destination;
+    var tFrequency = childSnapshot.val().frequency;
+    var tFirstTrain = childSnapshot.val().firstTrain;
+    var timeArr = tFirstTrain.split(":");
+    var trainTime = moment().hours(timeArr[0]).minutes(timeArr[1]);
+    var maxMoment = moment.max(moment(), trainTime);
+    var tMinutes;
+    var tArrival;
 
-  // Employee Info
-  console.log(empName);
-  console.log(empRole);
-  console.log(empStart);
-  console.log(empRate);
+    if (maxMoment === trainTime) {
+      tArrival = trainTime.format("hh:mm A");
+      tMinutes = trainTime.diff(moment(), "minutes");
+    } else {
 
-  // Prettify the employee start
-  var empStartPretty = moment.unix(empStart).format("MM/DD/YY");
+      var differenceTimes = moment().diff(trainTime, "minutes");
+      var tRemainder = differenceTimes % tFrequency;
+      tMinutes = tFrequency - tRemainder;
+      tArrival = moment().add(tMinutes, "m").format("hh:mm A");
+    }
+    console.log("tMinutes:", tMinutes);
+    console.log("tArrival:", tArrival);
 
-  // Calculate the months worked using hardcore math
-  // To calculate the months worked
-  var empMonths = moment().diff(moment(empStart, "X"), "months");
-  console.log(empMonths);
 
-  // Calculate the total billed rate
-  var empBilled = empMonths * empRate;
-  console.log(empBilled);
+    // New rows are appended to the table. A remove button will also be added to each row
+    $("#train-table > tbody").append("<tr><td>" + tName + "</td><td>" + tDestination + "</td><td>" +
+            tFrequency + "</td><td>" + tArrival + "</td><td>" + tMinutes + "</td><td>" + "<input type='submit' value='Remove' class='remove-train btn'>" + "</td></tr>");
 
-  // Add each train's data into the table
-  $("#employee-table > tbody").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" +
-  empStartPretty + "</td><td>" + empMonths + "</td><td>" + empRate + "</td><td>" + empBilled + "</td></tr>");
-});
+            // When the "remove" button is clicked, it will delete/remove that particular row
+            $(".remove-train").click(function(){
+              $(this).parents('tr').first().remove();
+          });
+
+  });
