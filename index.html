@@ -28,7 +28,35 @@
 
 
 
-    <div class="col-md-8">test</div>
+    <div id="tableRow" class="col-md-8">
+    <h3>Current Employees</h3>
+    <table class="table" style="width:100%">
+  <tr>
+    <th>Employee Name</th>
+    <th>Role</th>
+    <th>Start Date</th>
+    <th>Months Worked</th>
+    <th>Monthyl Rate ($)</th>
+    <th>Total Billed</th>
+  </tr>
+  <tr>
+    <td>Jill</td>
+    <td>Smith</td>
+    <td>50</td>
+    <td>Jill</td>
+    <td>Smith</td>
+    <td>50</td>
+  </tr>
+  <tr>
+    <td>Eve</td>
+    <td>Jackson</td>
+    <td>94</td>
+    <td>Jill</td>
+    <td>Smith</td>
+    <td>50</td>
+  </tr>
+</table>
+  </div>
 
 
 
@@ -37,5 +65,48 @@
     <!-- empty column end -->
 
   </div>
+
+
+
+
+
+  <div class="row">
+
+      <!-- empty column -->
+  <div class="col-md-3"></div>
+    <!-- empty column -->
+
+  <div class="col-md-6">
+
+    <!-- data entry form -->
+
+      <form>
+            <div class="form-group-row">
+              <label for="employee-name-input">Employee Name</label>
+              <input class="form-control" id="employee-name-input" type="text">
+            </div>
+            <div class="form-group-row">
+              <label for="role-input">Role</label>
+              <input class="form-control" id="role-input" type="text">
+            </div>
+            <div class="form-group-row">
+              <label for="start-input">Start Date (DD/MM/YY - ex: 01/01/89)</label>
+              <input class="form-control" id="start-input" type="text">
+            </div>
+            <div class="form-group-row">
+              <label for="rate-input">Monthly Rate</label>
+              <input class="form-control" id="rate-input" type="text">
+            </div>
+            <br>
+            <button class="btn btn-primary" id="add-employee-btn" type="submit">Submit</button>
+    </form>
+
+  </div>
+
+    <!-- empty column -->
+  <div class="col-md-3"></div>
+    <!-- empty column -->
+
+</div>
 
 </body>

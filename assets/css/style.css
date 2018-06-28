@@ -10,3 +10,21 @@ body {
   margin-top: 80px;
 
 }
+
+.col-md-6 {
+  background-color:rgba(255,255,255,0.6);
+  text-align: center;
+  padding: 30px 0px 50px 0px;
+  margin-top: 40px;
+
+}
+
+.form-group-row {
+  width: 500px;
+  text-align: left;
+  margin-left: 70px;
+}
+
+th {
+  font-size: 20px;
+}
