@@ -9,17 +9,15 @@ var config = {
   firebase.initializeApp(config);
 
 
-var database = firebase.database();
+  var trainData = firebase.database();
 
-// 2. Button for adding Employees
-$("#add-train-btn").on("click", function(event) {
-  event.preventDefault();
+    // This function will store the user input in firebase
+    $("#add-train-btn").on("click", function() {
 
-  // Grabs user input
-  var empName = $("#employee-name-input").val().trim();
-  var empRole = $("#role-input").val().trim();
-  var empStart = moment($("#start-input").val().trim(), "DD/MM/YY").format("X");
-  var empRate = $("#rate-input").val().trim();
+      var trainName = $("#train-name-input").val().trim();
+      var destination = $("#destination-input").val().trim();
+      var firstTrain = $("#first-train-input").val().trim();
+      var frequency = $("#frequency-input").val().trim();
 
   // Creates local "temporary" object for holding employee data
   var newEmp = {
