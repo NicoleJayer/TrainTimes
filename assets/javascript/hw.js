@@ -1,14 +1,15 @@
 
-  var config = {
-    apiKey: "AIzaSyAGK2ln5AYvzVMyjYAT5bXJfaPG5mkGQds",
-    authDomain: "traintimes-46de6.firebaseapp.com",
-    databaseURL: "https://traintimes-46de6.firebaseio.com",
-    projectId: "traintimes-46de6",
-    storageBucket: "traintimes-46de6.appspot.com",
-    messagingSenderId: "146296837702"
-  };
+var config = {
+  apiKey: "AIzaSyB3uNSgwhoe63aWK7fVqTqYD6Kl5H1FrsQ",
+  authDomain: "traintimes-46964.firebaseapp.com",
+  databaseURL: "https://traintimes-46964.firebaseio.com",
+  projectId: "traintimes-46964",
+  storageBucket: "",
+  messagingSenderId: "944924737814"
+};
 
-  firebase.initializeApp(config);
+firebase.initializeApp(config);
+
 
 
   var trainData = firebase.database();
